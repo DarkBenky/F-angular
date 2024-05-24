@@ -1,0 +1,60 @@
+<!-- <div *ngIf="isLoggedIn; else loginForm"> -->
+<div class="main">
+  <div (click)="addClick()">
+    <div class="navbar">
+      <div class="flex-row">
+        <p>Welcome</p>
+        <p>First name : {{ FirstName }}</p>
+        <p>Last name : {{ LastName }}</p>
+        <p>Login time : {{ LoginTime }}</p>
+        <p>Number of users {{ NumberOfUsers }}</p>
+        <p>Total Clicks {{ TotalClicks }}</p>
+      </div>
+
+      <button (click)="logout()">Logout</button>
+    </div>
+    <div class="container">
+      <div class="sidebar-left">
+        <div *ngFor="let user of [Users]">
+          <div *ngFor="let data of user; let i = index" (click)="selectUser(i)">
+            <br />
+            <p>{{ i }}</p>
+            <p>First Name : {{ data.firstName }}</p>
+            <p>Last Name : {{ data.lastName }}</p>
+            <p>Email : {{ data.email }}</p>
+            <div *ngIf="data.clicked">
+              <button (click)="getDetails(i)">Zobrazit deatail</button>
+              <button>Zacat chat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-content">
+        <div *ngIf="showDetails">
+          <div>
+            <p>First Name {{ Details.firstname }}</p>
+            <p>Last Name {{ Details.lastname }}</p>
+            <p>User Name {{ Details.username }}</p>
+            <p>Birthdate {{ Details.birthdate }}</p>
+            <p>University {{ Details.university }}</p>
+            <p>Mac Address {{Details.macAddress}}</p>
+            <p>IP {{ Details.ip}}</p>
+            <p>City {{Details.city}}</p>
+            <p>Eye Color {{Details.eyeColor}}</p>
+            <img src={{Details.img}} alt="">
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-right">
+        <p>lol</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- </div> -->
+
+<ng-template #loginForm>
+  <!-- Display login form when user is not logged in -->
+  <app-login (loginStatus)="handleLoginStatus($event)"> </app-login>
+</ng-template>
